@@ -38,8 +38,8 @@ export class TranslateDefaultParser extends TranslateParser {
     return result;
   }
 
-  getValue(target: any, key: string): any {
-    let keys = key.split('.');
+  getValue(target: any, key: string, delimiter = '|'): any {
+    let keys = key.split(delimiter);
     key = '';
     do {
       key += keys.shift();
@@ -66,7 +66,7 @@ export class TranslateDefaultParser extends TranslateParser {
     }
 
     return expr.replace(this.templateMatcher, (substring: string, b: string) => {
-      let r = this.getValue(params, b);
+      let r = this.getValue(params, b, '.');
       return isDefined(r) ? r : substring;
     });
   }

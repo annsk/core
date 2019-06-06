@@ -155,12 +155,12 @@ describe('TranslateService', () => {
     translations = {"TEST": {"TEST": "This is a test"}, "TEST2": {"TEST2": {"TEST2": "This is another test"}}};
     translate.use('en');
 
-    translate.get('TEST.TEST').subscribe((res: string) => {
+    translate.get('TEST|TEST').subscribe((res: string) => {
       expect(res).toEqual('This is a test');
     });
 
 
-    translate.get('TEST2.TEST2.TEST2').subscribe((res: string) => {
+    translate.get('TEST2|TEST2|TEST2').subscribe((res: string) => {
       expect(res).toEqual('This is another test');
     });
   });
@@ -184,10 +184,10 @@ describe('TranslateService', () => {
     translate.setTranslation('en', {"TEST": {"sub2": () => "value2"}}, true);
     translate.use('en');
 
-    translate.get('TEST.sub1').subscribe((res: string) => {
+    translate.get('TEST|sub1').subscribe((res: string) => {
       expect(res).toEqual('value1');
     });
-    translate.get('TEST.sub2').subscribe((res: string) => {
+    translate.get('TEST|sub2').subscribe((res: string) => {
       expect(res).toEqual('value2');
     });
   });
